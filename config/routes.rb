@@ -15,14 +15,9 @@ Rails.application.routes.draw do
     resource :favorite, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
   end
+  
   resources :users, only: [:index,:show,:edit,:update] do
-  # ★★★ ここからフォロー機能用のネストされたルートを追加 ★★★
-    # 1. resource :relationships の追加
-    #    - create/destroy アクションのルーティング
     resource :relationships, only: [:create, :destroy]
-    
-    # 2. followings/followers のルーティング
-    #    - member do ... end の形式で、特定のユーザーIDに紐づくアクションを追加
     member do
       get 'followings'
       get 'followers'

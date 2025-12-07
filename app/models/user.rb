@@ -27,4 +27,22 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
+  # ★★★ ここから検索ロジックの追加 ★★★
+  # ユーザー検索ロジック (nameに対する検索)
+  def self.searches(content, method)
+    if method == 'perfect'
+      # 完全一致: name が content と完全に一致
+      where('name LIKE ?', content)
+    elsif method == 'forward'
+      # 前方一致: name が content で始まる
+      where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      # 後方一致: name が content で終わる
+      where('name LIKE ?', '%' + content)
+    else
+      # 部分一致 (partial) またはそれ以外: name のどこかに content が含まれる
+      where('name LIKE ?', '%' + content + '%')
+    end
+  end
+  # ★★★ ここまで検索ロジックの追加 ★★★
 end

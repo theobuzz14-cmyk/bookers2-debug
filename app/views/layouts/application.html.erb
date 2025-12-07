@@ -11,6 +11,13 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+
+    <% if user_signed_in? %>
+      <div class="container mt-2">
+        <%= render 'searches/search' %>
+      </div>
+    <% end %>
+    
       <main>
         <p id="notice"><%= notice %></p>
         <%= yield %>

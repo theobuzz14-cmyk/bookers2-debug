@@ -1,0 +1,46 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Search Results</h2>
+      
+      <p>
+        検索対象: 
+        <% if @model == 'User' %>
+          <strong>ユーザー</strong>
+        <% else %>
+          <strong>投稿</strong>
+        <% end %>
+        | 検索ワード: 
+        <strong><%= @content %></strong>
+        | 検索方法: 
+        <% case @method %>
+        <% when 'perfect' %>
+          <strong>完全一致</strong>
+        <% when 'forward' %>
+          <strong>前方一致</strong>
+        <% when 'backward' %>
+          <strong>後方一致</strong>
+        <% else %>
+          <strong>部分一致</strong>
+        <% end %>
+      </p>
+
+      <% if @records.empty? %>
+        <p>該当する結果は見つかりませんでした。</p>
+      <% else %>
+        <%# 検索結果がユーザーの場合 %>
+        <% if @model == 'User' %>
+          <%# ユーザー一覧表示用のパーシャルを使用 %>
+          <%# users/_index.html.erb が存在し、users変数を期待していることを前提とします %>
+          <%= render 'users/index', users: @records %> 
+        
+        <%# 検索結果が投稿（Book）の場合 %>
+        <% elsif @model == 'Book' %>
+          <%# ステップ4-Cで作成した投稿一覧表示用のパーシャルを使用 %>
+          <%= render 'books/index_table', books: @records %>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

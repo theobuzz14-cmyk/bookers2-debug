@@ -6,6 +6,10 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.new(book_id: @book.id)
     favorite.save
     # redirect_back(fallback_location: root_path)
+    # render :create
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -13,5 +17,9 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(book_id: @book.id)
     favorite.destroy
     # redirect_back(fallback_location: root_path)
+    # render :destroy
+    respond_to do |format|
+      format.js
+    end
   end
 end

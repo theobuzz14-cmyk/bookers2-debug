@@ -1,0 +1,3 @@
+$("#comment_list").html("<%= j(render 'book_comments/comment_list', book: @book) %>");
+$("#comment_count").html("コメント一覧 (<%= @book.book_comments.count %>件)");
+$("#comment_form_<%= @book.id %>")[0].reset();

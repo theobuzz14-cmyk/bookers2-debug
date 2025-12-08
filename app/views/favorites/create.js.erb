@@ -1,3 +1,1 @@
-# いいねボタンの部分を、新しい状態（いいね済み）で置き換える
-# renderで _favorite_btn.html.erb を呼び出し、book変数に @book を渡している
-$("#favorite_btn_<%= @book.id %>").html("<%= j(render('books/favorite_btn', book: @book)) %>");
+$("#favorite_btn_<%= @book.id %>").html("<%= j(render 'books/favorite_btn', book: @book) %>");
